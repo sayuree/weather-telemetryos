@@ -1,67 +1,175 @@
-.render {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 3rem;
-  color: hsl(210 40% 88%);
-  background: hsl(212 28% 10%);
+.render.weather {
+  position: relative;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  color: white;
 }
 
-.render__logo {
-  width: 30rem;
-  max-width: 50%;
+.weather__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/houston-night.jpg");
+  background-size: cover;
+  background-position: center right;
+  filter: brightness(0.45) saturate(1.05);
+  z-index: 0;
 }
 
-.render__hero {
+.weather__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+}
+
+.weather__left {
+  flex: 1.2;
+  padding: 4rem 6rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  justify-content: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.95);
 }
 
-.render__hero-title {
-  font-size: 5rem;
+.weather__badge {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
   font-weight: 600;
-  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
-.render__hero-subtitle {
-  font-size: 3rem;
-  text-align: center;
+.weather__time {
+  font-size: 2rem;
+  opacity: 0.9;
 }
 
-.render__docs-information {
+.weather__date {
+  font-size: 3.2rem;
+  font-weight: 500;
+}
+
+.weather__temp {
+  font-size: 9rem;
+  font-weight: 300;
+  line-height: 0.9;
+}
+
+.weather__right {
+  flex: 1;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  gap: 1.2rem;
+  align-items: stretch;
 }
 
-.render__docs-information-title {
+.weather__panel {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.02)
+  );
+  border-radius: 12px;
+  padding: 1rem;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.weather__panel.top {
+  display: flex;
+}
+.weather__panel-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.tile {
+  padding: 1.2rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tile.large {
+  flex: 1.2;
+}
+.tile.small-col {
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.tile.medium {
+  flex: 1;
+  text-align: center;
+}
+.tile.wide {
+  flex: 1.6;
+}
+.tile__title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+.tile__value {
   font-size: 2rem;
   font-weight: 600;
-  text-align: center;
+}
+.tile__value.small {
+  font-size: 1rem;
+}
+.tile__sub {
+  opacity: 0.85;
+  margin-top: 0.4rem;
+}
+.tile__block {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
 }
 
-.render__docs-information-text {
-  font-size: 2rem;
-  max-width: 60rem;
-  text-align: center;
-}
-
-.render__docs-information-button {
+.weather__panel.middle {
   display: flex;
-  align-items: center;
-  background: rgb(248, 180, 53);
-  text-transform: uppercase;
-  font-size: 2rem;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.weather__panel.bottom {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.8rem;
+  justify-content: space-between;
+}
+.forecast__item {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  width: 72px;
+  text-align: center;
+}
+.forecast__day {
+  font-weight: 700;
+}
+.forecast__temp {
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 900px) {
+  .weather__left {
+    padding: 2rem;
+  }
+  .weather__temp {
+    font-size: 5rem;
+  }
+  .weather__right {
+    display: none;
+  }
 }

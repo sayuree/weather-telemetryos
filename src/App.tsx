@@ -1,20 +1,11 @@
-import { createBrowserRouter, RouterProvider, useLoaderData } from 'react-router'
-import { Render } from './views/Render'
-import { Settings } from './views/Settings'
-
-const router = createBrowserRouter([
-  {
-    path: '/render',
-    Component: Render,
-  },
-  {
-    path: '/settings',
-    Component: Settings,
-  },
-])
+import Settings from "./views/Settings";
+import Render from "./views/Render";
 
 export function App() {
-  return (
-    <RouterProvider router={router} />
-  )
+  const path = window.location.pathname;
+
+  if (path === "/settings") return <Settings />;
+  if (path === "/render") return <Render />;
+
+  return <div>Invalid mount point: {path}</div>;
 }

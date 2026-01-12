@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "description": "weather forecast app",
   "author": "sabina",
+  "type": "module",
   "scripts": {
     "dev": "tos serve",
     "build": "tsc && vite build"
   },
   "dependencies": {
     "@telemetryos/sdk": "^1.8.2",
+    "date-fns": "^4.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
     "react-router": "^7.9.1"
   },
   "devDependencies": {

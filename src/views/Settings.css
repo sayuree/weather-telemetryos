@@ -1,0 +1,274 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.page {
+  min-height: 100vh;
+  background: #f6f8fc;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.field label {
+  font-weight: 600;
+  font-size: small;
+  margin-bottom: 6px;
+  display: flex;
+  gap: 6px;
+}
+
+.required {
+  color: #e53935;
+}
+
+input,
+select {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #d6dbea;
+  padding: 0 14px;
+  font-size: 16px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+}
+
+.checkbox input {
+  display: none;
+}
+
+.checkbox span {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #22c55e;
+  position: relative;
+}
+
+.checkbox span::after {
+  content: "✓";
+  position: absolute;
+  color: #fff;
+  font-size: 14px;
+  top: 1px;
+  left: 5px;
+}
+
+.section {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.themeSettings {
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+.divider {
+  border-bottom: 1px dashed #d6dbea;
+  margin-top: 8px;
+}
+
+.color {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #d6dbea;
+}
+
+.reset {
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid #fca5a5;
+  background: #fff;
+  color: #ef4444;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.location-container {
+  position: relative;
+}
+
+.loading-indicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #666;
+}
+
+.predictions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 4px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+
+.prediction-item:hover {
+  background: #f5f5f5;
+}
+
+.prediction-main {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.prediction-secondary {
+  font-size: 13px;
+  color: #666;
+}
+
+.no-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 4px;
+  padding: 12px 16px;
+  color: #666;
+  font-size: 14px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.save-button {
+  background: linear-gradient(135deg, #4db6ac 0%, #26a69a 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 48px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(77, 182, 172, 0.4);
+  transition: all 0.3s ease;
+  min-width: 140px;
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+.save-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(77, 182, 172, 0.5);
+}
+
+.save-button:disabled {
+  background: #9db4a8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.save-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.error-message {
+  color: red;
+}
+
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.tooltip-icon {
+  cursor: help;
+  /* font-size: 14px; */
+  color: #666;
+  opacity: 0.7;
+}
+
+.tooltip-icon:hover {
+  opacity: 1;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.tooltip-wrapper:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
