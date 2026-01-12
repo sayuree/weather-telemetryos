@@ -12,6 +12,7 @@ import {
   WiStrongWind,
   WiTornado,
 } from "react-icons/wi";
+import { JSX } from "react";
 
 export const getWeatherIcon = (condition: string): JSX.Element => {
   const icons: Record<string, JSX.Element> = {

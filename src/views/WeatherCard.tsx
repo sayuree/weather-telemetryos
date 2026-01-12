@@ -48,6 +48,10 @@ interface ForecastData {
   }>;
 }
 
+interface ScaleSettings {
+  scale: string;
+}
+
 const THEMES: Record<string, ColorTheme> = {
   flamingo: {
     leftBg: "#2f2f2f",
@@ -122,13 +126,15 @@ export default function WeatherCard({ theme }: WeatherCardProps) {
 
   useEffect(() => {
     const loadInitialData = async () => {
-      const weatherData: WeatherData = await store().instance.get(
+      const weatherData = await store().instance.get<WeatherData>(
         "currentWeather"
       );
-      setCurrentWeather(weatherData);
+      setCurrentWeather(weatherData || null);
 
-      const forecast = await store().instance.get("forecastWeather");
-      setForecastWeather(forecast);
+      const forecast = await store().instance.get<ForecastData>(
+        "forecastWeather"
+      );
+      setForecastWeather(forecast || null);
 
       const settings = await store().instance.get("dateTimeSettings");
       if (settings) {
@@ -136,7 +142,9 @@ export default function WeatherCard({ theme }: WeatherCardProps) {
         setDateTimeSettings(settings);
       }
 
-      const scaleSettings = await store().instance.get("scaleSettings");
+      const scaleSettings = await store().instance.get<ScaleSettings>(
+        "scaleSettings"
+      );
       if (scaleSettings && scaleSettings.scale) {
         setScale(scaleSettings.scale);
       }
@@ -178,23 +186,24 @@ export default function WeatherCard({ theme }: WeatherCardProps) {
     // Subscribe to updates
     const unsubscribe = store().instance.subscribe("currentWeather", (data) => {
       console.log("Current weather updated:", data);
-      setCurrentWeather(data);
+      setCurrentWeather(data as WeatherData | null);
     });
 
     const unsubscribeForecast = store().instance.subscribe(
       "forecastWeather",
       (data) => {
         console.log("Forecast weather updated:", data);
-        setForecastWeather(data);
+        setForecastWeather(data as ForecastData | null);
       }
     );
 
     const unsubscribeScale = store().instance.subscribe(
       "scaleSettings",
       (data) => {
-        if (data && data.scale) {
-          console.log("Scale updated:", data.scale);
-          setScale(data.scale);
+        const scaleData = data as ScaleSettings;
+        if (scaleData && scaleData.scale) {
+          console.log("Scale updated:", scaleData.scale);
+          setScale(scaleData.scale);
         }
       }
     );

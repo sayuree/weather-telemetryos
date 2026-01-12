@@ -78,8 +78,6 @@ export async function fetchWeatherData({
       return;
     }
 
-    // Step 1: Get coordinates from city name using Geocoding API
-    console.log("📍 Fetching coordinates for:", cityName);
     const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
       cityName
     )}&limit=1&appid=${apiKey}`;
@@ -96,12 +94,7 @@ export async function fetchWeatherData({
     }
 
     const { lat, lon, name, country } = geoData[0];
-    console.log(`✅ Coordinates found: ${lat}, ${lon} for ${name}, ${country}`);
 
-    // Step 2: Fetch weather data using coordinates
-    console.log("🌤️ Fetching weather data...");
-
-    // Determine units based on scale
     const units = scale === "Fahrenheit" ? "imperial" : "metric";
 
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}&lang=${language}`;
@@ -113,16 +106,11 @@ export async function fetchWeatherData({
     }
 
     const data = await weatherResponse.json();
-
-    console.log("✅ Weather data received:", data);
     if (onWeatherData) onWeatherData(data);
 
-    // Store weather data in instance storage
     await store().instance.set("currentWeather", data);
     console.log("💾 Weather data stored");
 
-    // Step 3: Fetch 5-day forecast using coordinates
-    console.log("📅 Fetching forecast data...");
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}&lang=${language}`;
 
     const forecastResponse = await proxy().fetch(forecastUrl);
@@ -133,10 +121,8 @@ export async function fetchWeatherData({
 
     const forecast = await forecastResponse.json();
 
-    console.log("✅ Forecast data received:", forecast);
     if (onForecastData) onForecastData(forecast);
 
-    // Store forecast data in instance storage
     await store().instance.set("forecastWeather", forecast);
     console.log("💾 Forecast data stored");
   } catch (err) {
